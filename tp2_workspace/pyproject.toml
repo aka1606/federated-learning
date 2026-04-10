@@ -1,0 +1,26 @@
+[tool.flwr.app]
+publisher = "flwrlabs"
+
+[tool.flwr.app.components]
+serverapp = "pytorchexample.server_app:app"
+clientapp = "pytorchexample.client_app:app"
+
+[tool.flwr.app.config]
+# ---- Server-side parameters ----
+num-server-rounds = 50
+fraction-train = 1.0
+learning-rate = 0.01
+seed = 42
+
+# ---- Local training parameters ----
+local-epochs = 3
+batch-size = 64
+data-dir = "../tp1_workspace/quickstart-pytorch/data"
+
+# ---- Data generation parameters ----
+num-clients = 50
+alpha-dirichlet = 0.01
+
+# ---- Algorithm choice ----
+client-optimizer = "sgd"
+client-algorithm = "fedavg"

@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tp4-federated-learning"
+version = "1.0.0"
+description = "Personalized Federated Learning — TP4 (FedPer)"
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.26.0",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy",
+    "matplotlib",
+    "prettytable",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tp4example"]
+
+[tool.flwr.app]
+publisher = "tp4"
+
+[tool.flwr.app.components]
+serverapp = "tp4example.server_app:app"
+clientapp = "tp4example.client_app:app"
+
+[tool.flwr.app.config]
+# ---- Server ----
+num-server-rounds = 30
+fraction-train    = 1.0
+seed              = 42
+
+# ---- Local training ----
+local-epochs  = 3
+batch-size    = 64
+learning-rate = 0.01
+data-dir      = "./data"
+
+# ---- Data distribution ----
+num-clients     = 10
+alpha-dirichlet = 0.1
+
+# ---- FedPer ----
+# num-personalization-layers: KP in {0, 1, 2, 3}
+# KP=0 → FedAvg baseline
+# KP=1 → fc3 personalized
+# KP=2 → fc2, fc3 personalized
+# KP=3 → fc1, fc2, fc3 personalized
+num-personalization-layers = 1
+
+# ---- Output ----
+output-dir = "results/raw"

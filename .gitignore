@@ -1,0 +1,89 @@
+# === Python & Virtual Environments ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# === IDEs & Editors ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# === OS ===
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+.gitkeep
+
+# === Jupyter & Notebooks ===
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# === PyTorch & Machine Learning ===
+*.pth
+*.pt
+*.npy
+*.pkl
+*.pickle
+*.h5
+runs/
+
+# === Data Directories (Federated Learning Project) ===
+# Don't commit raw data, only code
+data/
+*/data/
+cifar10_raw/
+FashionMNIST/
+client_*.pt
+test_indices.pt
+
+# === Dataset binary files (FashionMNIST, MNIST…) ===
+*-ubyte
+*-ubyte.gz
+*.gz
+
+# === Results & Logs ===
+results/
+*.json
+*.csv
+*.log
+logs/
+.flwr/
+*.tmp
+
+# === IDE specific ===
+.DS_Store
+.AppleDouble
+
+# === Node/npm (if any) ===
+node_modules/

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "quickstart-pytorch"
+version = "1.0.1"
+description = "Federated Learning with PyTorch and Flower - TP1"
+license = "Apache-2.0"
+dependencies = [
+    "flwr[simulation]>=1.26.0",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy",
+    "matplotlib",
+    "prettytable",
+    "tomli",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pytorchexample"]
+
+[tool.flwr.app]
+publisher = "flwrlabs"
+
+[tool.flwr.app.components]
+serverapp = "pytorchexample.server_app:app"
+clientapp = "pytorchexample.client_app:app"
+
+[tool.flwr.app.config]
+# ---- Server-side parameters ----
+num-server-rounds = 10
+fraction-train = 1.0
+learning-rate = 0.001
+seed = 42
+
+# ---- Local training parameters ----
+local-epochs = 2
+batch-size = 32
+data-dir      = "./data"
+
+# ---- Data generation parameters ----
+num-clients = 50
+alpha-dirichlet = 0.1
+
+# ---- Algorithm choice ----
+# client-optimizer: "sgd" or "adam"
+# client-algorithm: "fedavg", "fedsgd", or "fedprox"
+client-optimizer = "adam"
+client-algorithm = "fedavg"
+fedprox-mu = 0.1
