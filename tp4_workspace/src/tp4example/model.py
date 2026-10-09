@@ -217,3 +217,4 @@ class Net(nn.Module):
             correct    += outputs.max(1)[1].eq(y_batch).sum().item()
             total      += x_batch.size(0)
         return (total_loss / total, correct / total) if total > 0 else (0.0, 0.0)
+    
